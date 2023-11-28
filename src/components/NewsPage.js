@@ -1,96 +1,98 @@
-import React, { Component } from 'react'
-import NewsItem from './NewsItem'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import NewsItem from "./NewsItem";
+import axios from "axios";
+import Spinner from "./Spinner";
 
-export class NewsPage extends Component {
+const NewsPage = (props) => {
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
 
-    constructor() {
-        super()
-        this.state = {
-            news: [],
-            loading: false,
-            page: 1,
-            totalResults: 0
-        }
-    }
-
-    componentDidMount() {
-      axios.get(`https://newsapi.org/v2/top-headlines`,{
+  const updateNews = () => {
+    setLoading(true);
+    axios
+      .get(`https://newsapi.org/v2/top-headlines`, {
         params: {
-          country: this.props.country,
-          apiKey: this.props.apiKey,
-          page: this.state.page,
-          pageSize: this.props.pageSize
-        }
+          country: props.country,
+          apiKey: props.apiKey,
+          page: page,
+          pageSize: props.pageSize,
+          category: props.category,
+        },
       })
       .then((response) => {
-        this.setState({
-          news: response.data.articles,
-          totalResults: response.data.totalResults
-        })
-      })
-    }
+        setNews(response.data.articles);
+        setTotalResults(response.data.totalResults);
+        setLoading(false);
+      });
+  };
 
-    handleNextClick = () => {
-      axios.get(`https://newsapi.org/v2/top-headlines`,{
-        params: {
-          country: this.props.country,
-          apiKey: this.props.apiKey,
-          page: this.state.page + 1,
-          pageSize: this.props.pageSize
-        }
-      })
-      .then((response) => {
-        this.setState({
-          news: response.data.articles,
-          page: this.state.page + 1
-        })
-      })
-    }
-     
-    handlePrevClick = () => {
-      axios.get(`https://newsapi.org/v2/top-headlines`,{
-        params: {
-          country: this.props.country,
-          apiKey: this.props.apiKey,
-          page: this.state.page - 1,
-          pageSize: this.props.pageSize
-        }
-      })
-      .then((response) => {
-        this.setState({
-          news: response.data.articles,
-          page: this.state.page - 1
-        })
-      })
-    }
+  useEffect(() => {
+    updateNews();
+    // eslint-disable-next-line
+  }, []);
 
-  render() {
-    return (
-      <div className='container'>
-        <h2 className='ms-5'>News - Top Headlines</h2>
-        
-        <div className="row">
+  const handleNextClick = () => {
+    setPage(page + 1);
+    updateNews();
+  };
 
-        {
-          this.state.news.map((element)=>{
-            return(
+  const handlePrevClick = () => {
+    setPage(page - 1);
+    updateNews();
+  };
+
+  return (
+    <div className="container">
+      <h2 className="ms-5">News - Top Headlines</h2>
+
+      <div className="row">
+        {loading ? (
+          <Spinner />
+        ) : (
+          news.map((element) => {
+            return (
               <div className="col-md-4 my-3">
-                <NewsItem key={element.url} title={element.title} desc={element.description} imgUrl={element.urlToImage} newsUrl={element.url}/>
+                <NewsItem
+                  key={element.url}
+                  title={element.title}
+                  desc={element.description}
+                  imgUrl={element.urlToImage}
+                  newsUrl={element.url}
+                />
               </div>
-            )
+            );
           })
-        }
-        </div>
-        <div className='d-flex justify-content-between my-3'>
-          <button onClick={this.handlePrevClick} className='btn btn-warning' disabled={this.state.page <= 1}>&larr; Previous</button>
-          <p><small>{this.state.page}/{Math.ceil(this.state.totalResults/this.props.pageSize)}</small></p>
-          <button onClick={this.handleNextClick} className='btn btn-warning' disabled={this.state.page === Math.ceil(this.state.totalResults/this.props.pageSize)}>Next &rarr;</button>
-        </div>
-        
+        )}
       </div>
-    )
-  }
-}
+      <div className="d-flex justify-content-between my-3">
+        <button
+          onClick={handlePrevClick}
+          className="btn btn-warning"
+          disabled={page <= 1}
+        >
+          &larr; Previous
+        </button>
+        <p>
+          <small>
+            {page}/
+            {Math.ceil(totalResults / props.pageSize)}
+          </small>
+        </p>
+        <button
+          onClick={handleNextClick}
+          className="btn btn-warning"
+          disabled={
+            page ===
+            Math.ceil(totalResults / props.pageSize)
+          }
+        >
+          Next &rarr;
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export default NewsPage
+export default NewsPage;

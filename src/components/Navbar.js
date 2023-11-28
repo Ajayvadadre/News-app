@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Navbar.css";
+import { Link, NavLink } from "react-router-dom";
 export class Navbar extends Component {
   render() {
     console.log(this);
@@ -7,9 +8,9 @@ export class Navbar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg bg-dark text-white ">
           <div className="container-fluid text-white">
-            <a className="navbar-brand text-white" href="/">
-              Navbar
-            </a>
+            <Link className="navbar-brand text-white" to="/">
+              News
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -23,27 +24,27 @@ export class Navbar extends Component {
             </button>
             <div className="collapse navbar-collapse flex justify-content-center me-5" id="navbarNavAltMarkup">
               <div className="navbar-nav">
-                <a className="nav-link active text-white" aria-current="page" href="/">
+                <NavLink className="nav-link text-white" to="/">
                   Home
-                </a>
-                <a className="nav-link text-white" href="/">
+                </NavLink>
+                <NavLink className="nav-link text-white" to="/business">
                 business
-                </a>
-                <a className="nav-link text-white" href="/">
+                </NavLink>
+                <NavLink className="nav-link text-white" to="/entertainment">
                 entertainment
-                </a>
-                <a className="nav-link text-white" aria-disabled="true"  href="/">
+                </NavLink>
+                <NavLink className="nav-link text-white" to="/health">
                 health
-                </a>
-                <a className="nav-link text-white" aria-disabled="true"  href="/">
+                </NavLink>
+                <NavLink className="nav-link text-white" to="/science">
                 science
-                </a>
-                <a className="nav-link  text-white " aria-disabled="true"  href="/">
+                </NavLink>
+                <NavLink className="nav-link  text-white" to="/sports">
                 sports
-                </a>
-                <a className="nav-link text-white" aria-disabled="true"  href="/">
+                </NavLink>
+                <NavLink className="nav-link text-white" to="/technology">
                 technology
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>
