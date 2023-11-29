@@ -31,7 +31,9 @@
   transform-origin: bottom left;
   transform: scaleX(1);
 }
-  .image{
-    height: 100px;
-    width: 100px;
-  }
+
+li.nav-item.dropdown::marker{
+  display: none;
+  text-align: left;
+  text-indent: 0;
+}

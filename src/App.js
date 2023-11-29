@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 export class App extends Component {
   apikey = "27a6e7cf59574d35b24c538ae520479e";
   render() {
-    console.log(this.apikey)
+    // console.log(this.apikey)
 
     return (
       <Router>
