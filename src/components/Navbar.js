@@ -1,9 +1,15 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
-export class Navbar extends Component {
-  render() {
-    console.log(this);
+import { ThemeContext } from "../context/themeContext";
+
+const Navbar = () => {
+
+  const theme = useContext(ThemeContext)
+
+  // theme.update()
+  console.log(theme.state.mode)
+    
     return (
       <div>
         <nav className="navbar navbar-expand-lg bg-dark text-white ">
@@ -46,12 +52,24 @@ export class Navbar extends Component {
                 technology
                 </NavLink>
               </div>
-            </div>
+              {/* <div className="dropdown">
+              <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+              </div>*/}
+            </div> 
           </div>
         </nav>
       </div>
     );
-  }
+
 }
 
 export default Navbar;

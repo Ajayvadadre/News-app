@@ -9,12 +9,12 @@
 .navbar-nav a::first-letter{
     text-transform: uppercase;  
 }
-.nav-link:after {
+/* .nav-link:after {
     content: '';
     position: absolute;
     width: 100%;
     height: 5px;
-    bottom: -10px;
+    bottom: 0px;
     left: 0px;
     transform: scaleX(0);
     box-shadow:
@@ -28,4 +28,4 @@
   .nav-link:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
+  } */

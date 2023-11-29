@@ -45,7 +45,7 @@ const NewsPage = (props) => {
 
   return (
     <div className="container">
-      <h2 className="ms-5">News - Top Headlines</h2>
+      {/* <h2 className="ms-5">News - Top Headlines</h2> */}
 
       <div className="row">
         {loading ? (
@@ -53,9 +53,8 @@ const NewsPage = (props) => {
         ) : (
           news.map((element) => {
             return (
-              <div className="col-md-4 my-3">
+              <div key={element.url} className="col-md-4 my-3">
                 <NewsItem
-                  key={element.url}
                   title={element.title}
                   desc={element.description}
                   imgUrl={element.urlToImage}
