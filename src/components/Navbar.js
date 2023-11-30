@@ -1,21 +1,35 @@
 import React, { Component, useState } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
+import axios from "axios";
 
 
-const  Navbar =()=>{ 
+const  Navbar =(props)=>{ 
 
-  const[contstate,setContstate]=useState()
+  const[Contstate,setContstate]=useState("");
+  let  apikey = "27a6e7cf59574d35b24c538ae520479e";
 
   function updatecountry(country){
     setContstate(country);
-    fetchcountry(country);
+    props.onCountryChange(country);
+    
+    
   };
   
   const fetchcountry=(country)=>{
+    axios
+      .get(`https://newsapi.org/v2/top-headlines`, {
+        params: {
+          country: country,
+          apiKey: this.apiKey,
+        },
+      })
+      .then((response) => {
+        console.log(response.country)
+        setContstate(response.country)
+      });
 
-
-  }
+    }
     return (
       <>
       <div>
@@ -62,23 +76,12 @@ const  Navbar =()=>{
                 </NavLink>
               </div>
               
-              <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Dropdown link
               </a>
-             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" onClick={updatecountry("ae")} href="#">United Arab Emirates</a>
-                <a class="dropdown-item" href="#">Argentina</a>
-                <a class="dropdown-item" href="#">Australia</a>
-                <a class="dropdown-item" href="#">Belgium</a>
-                <a class="dropdown-item" href="#">Bulgaria</a>
-                <a class="dropdown-item" href="#">Brazil</a>
-                <a class="dropdown-item" href="#">Canada</a>
-                <a class="dropdown-item" href="#">Switzerland</a>
-                <a class="dropdown-item" href="#">China</a>
-                <a class="dropdown-item" href="#">Colombia</a>
-                <a class="dropdown-item" href="#">Czech Republic</a>
-                <a class="dropdown-item" href="#">Germany</a>
+             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+             <a className="dropdown-item"  onClick={()=>{updatecountry("jp")}} href="#">United arabs</a>
                </div>
               </li>
             </div>

@@ -5,25 +5,47 @@ import NewsPage from "./components/NewsPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedCountry: "in",
+    };
+  }
+
+
+
+  handleCountryChange = (country) => {
+    this.setState({ selectedCountry: country} ,()=>{ console.log("selected:",this.state.selectedCountry)});
+
+  };
+
+
   apikey = "27a6e7cf59574d35b24c538ae520479e";
   render() {
-    // console.log(this.apikey)
 
+
+    console.log("APP",this.state.selectedCountry)
     return (
       <Router>
-
-        <Navbar />
+        <Navbar onCountryChange={this.handleCountryChange} />
         <Routes>
-          <Route
+        <Route
             path="/"
             element={
               <NewsPage
                 key=""
-                country="in"
+                country={this.state.selectedCountry}
                 apiKey={this.apikey}
                 pageSize={9}
                 category="general"
               />
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <NewsPage  key="" country="in" apiKey={this.apikey} pageSize={9} category="general"/>
             }
           />
           <Route

@@ -4,6 +4,8 @@ import axios from "axios";
 import Spinner from "./Spinner";
 
 const NewsPage = (props) => {
+  console.log("NEWSPAGE",props.country)
+
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -11,6 +13,7 @@ const NewsPage = (props) => {
 
   const updateNews = () => {
     setLoading(true);
+    // console.log("country",props.country)
     axios
       .get(`https://newsapi.org/v2/top-headlines`, {
         params: {
@@ -31,7 +34,7 @@ const NewsPage = (props) => {
   useEffect(() => {
     updateNews();
     // eslint-disable-next-line
-  }, []);
+  }, [props.country, props.apiKey, props.pageSize, props.category]);
 
   const handleNextClick = () => {
     setPage(page + 1);
@@ -45,13 +48,14 @@ const NewsPage = (props) => {
 
   return (
     <div className="container">
-
-        {/* <h2 className="ms-5">News - Top Headlines</h2> */}
+      {/* <h2 className="ms-5">News - Top Headlines</h2> */}
       <div className="row">
-        {loading ? (<Spinner/>) : (
-          news.map((element) => {
+        {loading ? (
+          <Spinner />
+        ) : (
+          news.map((element, index) => {
             return (
-              <div className="col-md-4 my-3">
+              <div key={index} className="col-md-4 my-3">
                 <NewsItem
                   key={element.url}
                   title={element.title}
@@ -74,17 +78,13 @@ const NewsPage = (props) => {
         </button>
         <p>
           <small>
-            {page}/
-            {Math.ceil(totalResults / props.pageSize)}
+            {page}/{Math.ceil(totalResults / props.pageSize)}
           </small>
         </p>
         <button
           onClick={handleNextClick}
           className="btn btn-warning"
-          disabled={
-            page ===
-            Math.ceil(totalResults / props.pageSize)
-          }
+          disabled={page === Math.ceil(totalResults / props.pageSize)}
         >
           Next &rarr;
         </button>
