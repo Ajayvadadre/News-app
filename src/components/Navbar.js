@@ -36,7 +36,7 @@ const  Navbar =(props)=>{
         <nav className="navbar navbar-expand-lg bg-dark text-white ">
           <div className="container-fluid text-white">
             <Link className="navbar-brand text-white" to="/">
-              NEWS
+              NewsTime
             </Link>
             
             <button
