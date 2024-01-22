@@ -4,7 +4,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 
 const NewsPage = (props) => {
-  console.log("NEWSPAGE",props.country)
+  // console.log("NEWSPAGE",props.country)
 
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -47,49 +47,49 @@ const NewsPage = (props) => {
   };
 
   return (
+    <>
     <div className="container">
-      {/* <h2 className="ms-5">News - Top Headlines</h2> */}
-      <div className="row">
-        {loading ? (
-          <Spinner />
-        ) : (
-          news.map((element, index) => {
-            return (
-              <div key={index} className="col-md-4 my-3">
-                <NewsItem
-                  key={element.url}
-                  title={element.title}
-                  desc={element.description}
-                  imgUrl={element.urlToImage}
-                  newsUrl={element.url}
-                />
-              </div>
-            );
-          })
-        )}
-      </div>
-      <div className="d-flex justify-content-between my-3">
-        <button
-          onClick={handlePrevClick}
-          className="btn btn-warning"
-          disabled={page <= 1}
-        >
-          &larr; Previous
-        </button>
-        <p>
-          <small>
-            {page}/{Math.ceil(totalResults / props.pageSize)}
-          </small>
-        </p>
-        <button
-          onClick={handleNextClick}
-          className="btn btn-warning"
-          disabled={page === Math.ceil(totalResults / props.pageSize)}
-        >
-          Next &rarr;
-        </button>
-      </div>
+    <h2 className="ms-5">News - Top Headlines</h2>
+    <div className="row">
+      {loading ? (<Spinner />) : (
+        news.map((element, index) => {
+          return (
+            <div key={index} className="col-md-4 my-3">
+              <NewsItem
+                key={element.url}
+                title={element.title}
+                desc={element.description}
+                imgUrl={element.urlToImage}
+                newsUrl={element.url}
+              />
+            </div>
+          );
+        })
+      )}
     </div>
+    <div className="d-flex justify-content-between my-3">
+      <button
+        onClick={handlePrevClick}
+        className="btn btn-warning"
+        disabled={page <= 1}
+      >
+        &larr; Previous
+      </button>
+      <p>
+        <small>
+          {page}/{Math.ceil(totalResults / props.pageSize)}
+        </small>
+      </p>
+      <button
+        onClick={handleNextClick}
+        className="btn btn-warning"
+        disabled={page === Math.ceil(totalResults / props.pageSize)}
+      >
+        Next &rarr;
+      </button>
+    </div>
+  </div>
+  </>
   );
 };
 

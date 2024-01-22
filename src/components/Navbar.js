@@ -76,14 +76,23 @@ const  Navbar =(props)=>{
                 </NavLink>
               </div>
               
-              <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Dropdown link
-              </a>
-             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-             <a className="dropdown-item"  onClick={()=>{updatecountry("jp")}} href="#">United arabs</a>
-               </div>
-              </li>
+
+
+
+              <div class="btn-group ms-4">
+                  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Countries
+                </button>
+                <div class="dropdown-menu">
+                <a className="dropdown-item"  onClick={()=>{updatecountry("in")}} href="#">India</a>
+                <a className="dropdown-item"  onClick={()=>{updatecountry("ar")}} href="#">Argentina</a>
+                <a className="dropdown-item"  onClick={()=>{updatecountry("jp")}} href="#">Japan</a>
+                <a className="dropdown-item"  onClick={()=>{updatecountry("de")}} href="#">Germany</a>
+                <a className="dropdown-item"  onClick={()=>{updatecountry("ru")}} href="#">Russia</a>
+                <a className="dropdown-item"  onClick={()=>{updatecountry("de")}} href="#">Portigal</a>
+                <a className="dropdown-item"  onClick={()=>{updatecountry("fr")}} href="#">France</a>
+                </div>
+              </div>
             </div>
           </div>
         </nav>

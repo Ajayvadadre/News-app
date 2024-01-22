@@ -13,8 +13,6 @@ export class App extends Component {
     };
   }
 
-
-
   handleCountryChange = (country) => {
     this.setState({ selectedCountry: country} ,()=>{ console.log("selected:",this.state.selectedCountry)});
 
@@ -41,7 +39,7 @@ export class App extends Component {
                 category="general"
               />
             }
-          />
+          />      
           <Route
             path="/"
             element={
