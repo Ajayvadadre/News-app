@@ -1,8 +1,8 @@
-import React, { Component, useState } from "react";
+import React, {  useState } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
-
+import { Dropdown } from "react-bootstrap"; 
 
 const  Navbar =(props)=>{ 
 
@@ -11,25 +11,31 @@ const  Navbar =(props)=>{
 
   function updatecountry(country){
     setContstate(country);
-    props.onCountryChange(country);
-    
-    
+    props.changeCountry(country);
+    fetchcountry(country)
   };
+  
   
   const fetchcountry=(country)=>{
     axios
       .get(`https://newsapi.org/v2/top-headlines`, {
         params: {
           country: country,
-          apiKey: this.apiKey,
+          apiKey: apikey, 
         },
       })
       .then((response) => {
-        console.log(response.country)
-        setContstate(response.country)
+        // console.log(response.data)
+        props.changeCountry(response.data)
+        setContstate(country)
+      })
+      .catch((error) => {
+        console.error("Error fetching news:", error);
       });
+    };
 
-    }
+
+// Main project
     return (
       <>
       <div>
@@ -76,22 +82,22 @@ const  Navbar =(props)=>{
                 </NavLink>
               </div>
               
+              <div className="btn-group ms-4">
+              <Dropdown className="ms-4">
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Countries
+                </Dropdown.Toggle>
 
-
-
-              <div class="btn-group ms-4">
-                  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Countries
-                </button>
-                <div class="dropdown-menu">
-                <a className="dropdown-item"  onClick={()=>{updatecountry("in")}} href="#">India</a>
-                <a className="dropdown-item"  onClick={()=>{updatecountry("ar")}} href="#">Argentina</a>
-                <a className="dropdown-item"  onClick={()=>{updatecountry("jp")}} href="#">Japan</a>
-                <a className="dropdown-item"  onClick={()=>{updatecountry("de")}} href="#">Germany</a>
-                <a className="dropdown-item"  onClick={()=>{updatecountry("ru")}} href="#">Russia</a>
-                <a className="dropdown-item"  onClick={()=>{updatecountry("de")}} href="#">Portigal</a>
-                <a className="dropdown-item"  onClick={()=>{updatecountry("fr")}} href="#">France</a>
-                </div>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={()=>{updatecountry("in")}}>India</Dropdown.Item>
+                  <Dropdown.Item onClick={()=>{updatecountry("ar")}}>Argentina</Dropdown.Item>
+                  <Dropdown.Item onClick={()=>{updatecountry("jp")}}>Japan</Dropdown.Item>
+                  <Dropdown.Item onClick={()=>{updatecountry("de")}}>Germany</Dropdown.Item>
+                  <Dropdown.Item onClick={()=>{updatecountry("ru")}}>Russia</Dropdown.Item>
+                  <Dropdown.Item onClick={()=>{updatecountry("de")}}>Portugal</Dropdown.Item>
+                  <Dropdown.Item onClick={()=>{updatecountry("fr")}}>France</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
               </div>
             </div>
           </div>
@@ -99,6 +105,6 @@ const  Navbar =(props)=>{
       </div>
   </>
     );
-};
+    };
     
 export default Navbar;

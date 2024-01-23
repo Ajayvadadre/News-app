@@ -9,3 +9,23 @@
 .navbar-nav a::first-letter{
     text-transform: uppercase;  
 }
+/* .nav-link:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: 0px;
+    left: 0px;
+    transform: scaleX(0);
+    box-shadow:
+       0 5px 0 #E8476A,
+      0 10px 0 purple;
+    background: #FFA01B ;
+    transform-origin: bottom right;
+    transition: transform 0.5s ease-out;
+  }
+  
+  .nav-link:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  } */

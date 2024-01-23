@@ -1,127 +1,111 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import NewsPage from "./components/NewsPage";
 // import Spinner from "./components/Spinner";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-export class App extends Component {
+const App = () => {
+  let apikey ='27a6e7cf59574d35b24c538ae520479e';
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCountry: "in",
-    };
-  }
+  const [country, setCountry] = useState("in");
 
-  handleCountryChange = (country) => {
-    this.setState({ selectedCountry: country} ,()=>{ console.log("selected:",this.state.selectedCountry)});
-
+  const changeCountry = (country) => {
+    setCountry(country);
   };
 
-
-  apikey = "27a6e7cf59574d35b24c538ae520479e";
-  render() {
-
-
-    console.log("APP",this.state.selectedCountry)
-    return (
-      <Router>
-        <Navbar onCountryChange={this.handleCountryChange} />
-        <Routes>
+  return (
+    <Router>
+      <Navbar country={country} changeCountry={changeCountry} />
+      <Routes>
         <Route
-            path="/"
-            element={
-              <NewsPage
-                key=""
-                country={this.state.selectedCountry}
-                apiKey={this.apikey}
-                pageSize={9}
-                category="general"
-              />
-            }
-          />      
-          <Route
-            path="/"
-            element={
-              <NewsPage  key="" country="in" apiKey={this.apikey} pageSize={9} category="general"/>
-            }
-          />
-          <Route
-            path="/business"
-            element={
-              <NewsPage
-                key="business"
-                country="in"
-                apiKey={this.apikey}
-                pageSize={9}
-                category="business"
-              />
-            }
-          />
-          <Route
-            path="/entertainment"
-            element={
-              <NewsPage
-                key="entertainment"
-                country="in"
-                apiKey={this.apikey}
-                pageSize={9}
-                category="entertainment"
-              />
-            }
-          />
-          <Route
-            path="/health"
-            element={
-              <NewsPage
-                key="health"
-                country="in"
-                apiKey={this.apikey}
-                pageSize={9}
-                category="health"
-              />
-            }
-          />
-          <Route
-            path="/science"
-            element={
-              <NewsPage
-                key="science"
-                country="in"
-                apiKey={this.apikey}
-                pageSize={9}
-                category="science"
-              />
-            }
-          />
-          <Route
-            path="/sports"
-            element={
-              <NewsPage
-                key="sports"
-                country="in"
-                apiKey={this.apikey}
-                pageSize={9}
-                category="sports"
-              />
-            }
-          />
-          <Route
-            path="/technology"
-            element={
-              <NewsPage
-                key="technology"
-                country="in"
-                apiKey={this.apikey}
-                pageSize={9}
-                category="technology"
-              />
-            }
-          />
-        </Routes>
-      </Router>
-    );
-  }
-}
+          path="/"
+          element={
+            <NewsPage
+              key=""
+              country={country}
+              apiKey={apikey}
+              pageSize={9}
+              category="general"
+            />
+          }
+        />
+        <Route
+          path="/business"
+          element={
+            <NewsPage
+              key="business"
+              country={country}
+              apiKey={apikey}
+              pageSize={9}
+              category="business"
+            />
+          }
+        />
+        <Route
+          path="/entertainment"
+          element={
+            <NewsPage
+              key="entertainment"
+              country={country}
+              apiKey={apikey}
+              pageSize={9}
+              category="entertainment"
+            />
+          }
+        />
+        <Route
+          path="/health"
+          element={
+            <NewsPage
+              key="health"
+              country={country}
+              apiKey={apikey}
+              pageSize={9}
+              category="health"
+            />
+          }
+        />
+        <Route
+          path="/science"
+          element={
+            <NewsPage
+              key="science"
+              country={country}
+              apiKey={apikey}
+              pageSize={9}
+              category="science"
+            />
+          }
+        />
+        <Route
+          path="/sports"
+          element={
+            <NewsPage
+              key="sports"
+              country={country}
+              apiKey={apikey}
+              pageSize={9}
+              category="sports"
+            />
+          }
+        />
+        <Route
+          path="/technology"
+          element={
+            <NewsPage
+              key="technology"
+              country={country}
+              apiKey={apikey}
+              pageSize={9}
+              category="technology"
+            />
+          }
+        />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
