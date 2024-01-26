@@ -10,10 +10,22 @@ NewsTime is a React-based web application that provides real-time news updates f
 
 ## Features
 
-- **Real-Time News:** Get up-to-date news articles from around the world.
-- **Category-wise Filtering:** Explore news based on specific categories.
-- **Country Selection:** Customize your news feed by selecting your preferred country.
-- **Responsive Design:** Enjoy a seamless experience across various devices.
+ ### Real-Time News:
+- **Get up-to-date news articles from around the world**.
+ <img src="images/Main.png" width="600px">
+ 
+ ### Category-wise Filtering:
+- **Explore news based on specific categories.**
+ <img src="images/ChangingGenre.png" width="600px">
+
+ ### Country Selection:
+ **Customize your news feed by selecting your preferred country.**
+ 
+ <img src="images/Countries.png" width="600px">
+ 
+ ### Changed Country to Japan:
+ <img src="images/Changed-countries.png" width="600px">
+ 
 
 ## Usage
 - Select a **category** from the navigation bar.
